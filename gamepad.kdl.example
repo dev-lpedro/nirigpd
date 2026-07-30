@@ -1,0 +1,103 @@
+// -- Botões Principais --
+// BTN_SOUTH  (A / X) | BTN_EAST  (B / O)
+// BTN_NORTH  (Y / Tri) | BTN_WEST  (X / Quad)
+//
+// -- Gatilhos, Ombros e Centrais --
+// BTN_TL / BTN_TR    (L1 / R1)
+// BTN_TL2 / BTN_TR2  (L2 / R2)
+// BTN_START, BTN_SELECT, BTN_MODE (Home/Logo)
+//
+// -- Analógicos e D-Pad (Nomes Especiais do nosso C++) --
+// L_STICK_UP, L_STICK_DOWN, L_STICK_LEFT, L_STICK_RIGHT
+// R_STICK_UP, R_STICK_DOWN, R_STICK_LEFT, R_STICK_RIGHT
+// DPAD_UP, DPAD_DOWN, DPAD_LEFT, DPAD_RIGHT
+//
+// ⏱ PROPRIEDADES DE ATALHO (Podem ser usadas em qualquer bind)
+// - on="press" (Padrão) -> Dispara assim que aperta.
+// - on="hold"           -> Dispara repetidamente enquanto segura. 
+// - on="press hold"     -> Dispara quando aperta e segura
+// - delay_ms="150"      -> (Obrigatório com "hold") Intervalo da repetição.
+//
+// =====================================================================
+
+// Zona Morta para ignorar "drift" dos analógicos (0 até 32767)
+deadzone "15000"
+
+// ---------------------------------------------------------------------
+// 1. Hold Mode
+// ---------------------------------------------------------------------
+// Qual ou quais botões precisam estar SEGURANDO para ativar os atalhos rápidos.
+hold_combo "BTN_MODE"
+
+// ---------------------------------------------------------------------
+// 2. Toggle Mode
+// ---------------------------------------------------------------------
+// Combo para ligar/desligar o modo onde os botões controlam o niri livremente.
+toggle_combo "BTN_START" "BTN_SELECT" "BTN_MODE"
+
+
+// =====================================================================
+// MAPEAMENTOS: HOLD MODE
+// (Ações rápidas enquanto segura o botão Home/Logo)
+// =====================================================================
+hold_bindings {
+    
+    // -- Mídia e Volume (Usando Analógico Direito) --
+    // O wpctl não precisa do Noctalia Shell, é nativo do WirePlumber/Pipewire
+    R_STICK_UP   "spawn -- wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+" on="press hold" delay_ms="100"
+    R_STICK_DOWN "spawn -- wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" on="press hold" delay_ms="100"
+    R_STICK_LEFT "spawn -- playerctl previous"
+    R_STICK_RIGHT "spawn -- playerctl next"
+    
+    BTN_THUMBR   "spawn -- wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" // Clique no analógico muta
+    
+    // -- Lançadores (Comandos do seu niri) --
+    BTN_SOUTH "spawn -- alacritty" // Home + A = Terminal
+    BTN_WEST  "spawn -- vivaldi"   // Home + X = Navegador
+    BTN_NORTH "spawn-sh -- qs -c noctalia-shell ipc call launcher toggle" // Home + Y = App Launcher
+    BTN_EAST  "toggle-overview" // Home + B = Niri Overview
+    
+    // -- Ações Destrutivas / Janela --
+    BTN_TR2 "close-window" // Gatilho Direito fecha a janela atual
+    BTN_TL2 "toggle-window-floating" // Gatilho esquerdo deixa flutuante
+    BTN_START "maximize-column"
+}
+
+
+// =====================================================================
+// MAPEAMENTOS: MODO TOTAL (LIVRE)
+// (Ativado pelo combo Start+Select+Home)
+// =====================================================================
+toggle_bindings {
+
+    // -- Navegação de Janelas e Colunas (D-PAD e Analógico Esquerdo) --
+    // Dispara a cada 150ms enquanto segurado (Mesma velocidade do seu WheelScroll no niri)
+    DPAD_LEFT  "focus-column-left"  on="press hold" delay_ms="150"
+    DPAD_RIGHT "focus-column-right" on="press hold" delay_ms="150"
+    DPAD_UP    "focus-window-up"    on="press hold" delay_ms="150"
+    DPAD_DOWN  "focus-window-down"  on="press hold" delay_ms="150"
+    
+    L_STICK_LEFT  "focus-column-left"  on="press hold" delay_ms="150"
+    L_STICK_RIGHT "focus-column-right" on="press hold" delay_ms="150"
+    L_STICK_UP    "focus-window-up"    on="press hold" delay_ms="150"
+    L_STICK_DOWN  "focus-window-down"  on="press hold" delay_ms="150"
+
+    // -- Movimentação de Janelas (Gatilhos Superiores + Direção) --
+    // Como os botões normais usam "press" por padrão, você pode apertar repetidamente.
+    BTN_TL "move-column-left"
+    BTN_TR "move-column-right"
+    BTN_NORTH "move-window-up"
+    BTN_SOUTH "move-window-down"
+    
+    // -- Troca de Workspaces (Ombros / Gatilhos Inferiores) --
+    BTN_TL2 "focus-workspace-down" on="press hold" delay_ms="200"
+    BTN_TR2 "focus-workspace-up"   on="press hold" delay_ms="200"
+    
+    // -- Layout e Tamanho --
+    BTN_WEST "set-column-width -10%" on="press hold" delay_ms="100" // Segura X para afinar
+    BTN_EAST "set-column-width +10%" on="press hold" delay_ms="100" // Segura B para alargar
+    BTN_THUMBL "center-column" // Clique no L3 centraliza
+    
+    // -- Saída / Utilidades --
+    BTN_SELECT "toggle-keyboard-shortcuts-inhibit" // Botão Select como emergência do Niri
+}
