@@ -32,7 +32,7 @@ cmake .. && make
 ./niripad
 ```
 
-🎯 Roadmap & Futuras Implementações
+## 🎯 Roadmap & Futuras Implementações
 
 Esta versão v0.1 é um protótipo funcional do núcleo do programa. As seguintes melhorias estão planejadas para as próximas versões:
 
@@ -44,11 +44,11 @@ Esta versão v0.1 é um protótipo funcional do núcleo do programa. As seguinte
   
   [ ] Hot-plugging: Reconexão automática do gamepad em caso de desconexão do cabo ou bluetooth.
 
-📋 Nota de Desenvolvimento
+## 📋 Nota de Desenvolvimento
 
   Nesta versão v0.1, a lógica do parser KDL foi gerada com auxílio de IA para agilizar o protótipo e permitir focar o aprendizado na integração com a biblioteca SDL3. Uma reescrita manual em C++ está planejada para a v0.2.
   Projeto inspirado pela experiência de navegação do compositor Niri.
 
-📄 Licença
+## 📄 Licença
 
 Este projeto está sob a licença MIT - veja o arquivo LICENSE para mais detalhes.
