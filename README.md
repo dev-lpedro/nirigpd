@@ -18,7 +18,7 @@ Ele permite criar atalhos globais, combos e modos de navegação utilizando bot�
 
 ```bash
 # Clone o repositório
-git clone [https://github.com/dev-lpedro/niripad.git](https://github.com/dev-lpedro/niripad.git)
+git clone https://github.com/dev-lpedro/niripad.git
 cd niripad
 
 # Copie o arquivo de configuração de exemplo
