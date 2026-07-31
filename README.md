@@ -1,6 +1,6 @@
-# niripad (v0.1)
+# nirigpd (v0.1)
 
-**niripad** é um daemon em C++ e SDL3 para mapear controles/gamepads para ações no compositor Wayland [Niri](https://github.com/YaLteR/niri).
+**nirigpd** (niri-gamepad-daemon) é um daemon em C++ e SDL3 para mapear controles/gamepads para ações no compositor Wayland [Niri](https://github.com/YaLteR/niri).
 
 Ele permite criar atalhos globais, combos e modos de navegação utilizando botões e eixos analógicos do seu controle.
 
@@ -18,8 +18,8 @@ Ele permite criar atalhos globais, combos e modos de navegação utilizando bot�
 
 ```bash
 # Clone o repositório
-git clone https://github.com/dev-lpedro/niripad.git
-cd niripad
+git clone https://github.com/dev-lpedro/nirigpd.git
+cd nirigpd
 
 # Copie o arquivo de configuração de exemplo
 cp gamepad.kdl.example gamepad.kdl
@@ -29,7 +29,7 @@ mkdir build && cd build
 cmake .. && make
 
 # Execute
-./niripad
+./nirigpd
 ```
 
 ## 🎯 Roadmap & Futuras Implementações
@@ -40,14 +40,13 @@ Esta versão v0.1 é um protótipo funcional do núcleo do programa. As seguinte
   
   [ ] Hot-Reload de Configuração: Atualização automática das bindings ao salvar o arquivo .kdl sem precisar reiniciar o processo.
   
-  [ ] Modo Daemon & Integração Systemd: Criação do arquivo niripad.service para gerenciamento nativo de background via systemd --user.
+  [ ] Modo Daemon & Integração Systemd: Criação do arquivo nirigpd.service para gerenciamento nativo de background via systemd --user.
   
   [ ] Hot-plugging: Reconexão automática do gamepad em caso de desconexão do cabo ou bluetooth.
 
 ## 📋 Nota de Desenvolvimento
 
-  Nesta versão v0.1, a lógica do parser KDL foi gerada com auxílio de IA para agilizar o protótipo e permitir focar o aprendizado na integração com a biblioteca SDL3. Uma reescrita manual em C++ está planejada para a v0.2.
-  Projeto inspirado pela experiência de navegação do compositor Niri.
+  Nesta versão v0.1, a lógica do parser KDL foi gerada com auxílio de IA para agilizar o protótipo e permitir focar o aprendizado na integração com a biblioteca SDL3. Uma reescrita manual em C++ está planejada para versões futuras.
 
 ## 📄 Licença
 
