@@ -37,8 +37,11 @@ cmake .. && make
 Esta versão v0.1 é um protótipo funcional do núcleo do programa. As seguintes melhorias estão planejadas para as próximas versões:
 
   [ ] Reescrita do Parser KDL: Para aproximar a sintaxe do arquivo de configuração ao padrão nativo do Niri.
+  
   [ ] Hot-Reload de Configuração: Atualização automática das bindings ao salvar o arquivo .kdl sem precisar reiniciar o processo.
+  
   [ ] Modo Daemon & Integração Systemd: Criação do arquivo niripad.service para gerenciamento nativo de background via systemd --user.
+  
   [ ] Hot-plugging: Reconexão automática do gamepad em caso de desconexão do cabo ou bluetooth.
 
 📋 Nota de Desenvolvimento
