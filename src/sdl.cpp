@@ -1,12 +1,12 @@
 #include "../include/sdl.hpp"
 #include "../include/config.hpp"
 #include "../include/sdl_helpers.hpp"
+#include <SDL3/SDL_events.h>
+#include <SDL3/SDL_gamepad.h>
 
 using namespace std;
 
-// 1. FUNÇÃO DE INICIALIZAÇÃO
-SDL_Gamepad* inicializar_sdl() {
-    SDL_Init(SDL_INIT_GAMEPAD);
+SDL_Gamepad* procurar_controle() {
     int count = 0;
     SDL_JoystickID* id = SDL_GetGamepads(&count);
     SDL_Gamepad* my_gamepad = nullptr;
@@ -22,6 +22,12 @@ SDL_Gamepad* inicializar_sdl() {
 
     SDL_free(id);
     return my_gamepad;
+}
+
+// 1. FUNÇÃO DE INICIALIZAÇÃO
+SDL_Gamepad* inicializar_sdl() {
+    SDL_Init(SDL_INIT_GAMEPAD);
+    return procurar_controle();
 }
 
 BindingMode checar_modo(SDL_Gamepad* gamepad , const Config* config) {
@@ -52,14 +58,20 @@ InputType checar_button_ou_axis(const SDL_Event event) {
 }
 
 void rodar_loop(SDL_Gamepad* gamepad , const Config* config) {
-    if (gamepad == nullptr) return;
-
     SDL_Event event;
     bool is_toggle_mode = false;
 
     while (SDL_WaitEvent(&event) && event.type != SDL_EVENT_QUIT) {
 
-        if (!(event.type == SDL_EVENT_GAMEPAD_BUTTON_DOWN || event.type == SDL_EVENT_GAMEPAD_BUTTON_UP || event.type == SDL_EVENT_GAMEPAD_AXIS_MOTION)) {
+        if (event.type == SDL_EVENT_GAMEPAD_ADDED && gamepad == nullptr) {
+            gamepad = procurar_controle();
+            continue;
+        } else if (event.type == SDL_EVENT_GAMEPAD_REMOVED && event.gdevice.which == SDL_GetGamepadID(gamepad)) {
+            cout << "Controle desconectado!" << endl;
+            SDL_CloseGamepad(gamepad);
+            gamepad = nullptr;
+            continue;
+        }else if (gamepad == nullptr || !(event.type == SDL_EVENT_GAMEPAD_BUTTON_DOWN || event.type == SDL_EVENT_GAMEPAD_BUTTON_UP || event.type == SDL_EVENT_GAMEPAD_AXIS_MOTION)) {
             continue;
         }
 

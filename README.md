@@ -42,7 +42,7 @@ Esta versão v0.1 é um protótipo funcional do núcleo do programa. As seguinte
   
   [ ] Modo Daemon & Integração Systemd: Criação do arquivo nirigpd.service para gerenciamento nativo de background via systemd --user.
   
-  [ ] Hot-plugging: Reconexão automática do gamepad em caso de desconexão do cabo ou bluetooth.
+  [X] Hot-plugging: Reconexão automática do gamepad em caso de desconexão do cabo ou bluetooth.
 
 ## 📋 Nota de Desenvolvimento
 
